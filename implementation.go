@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"strings"
 )
 
 func CalculatePostfix(input string) (string, error) {
 	var stack Stack
-	for i := 0; i < len(input); i++ {
-		currentChar := input[i : i+1]
+	inputSlice := strings.Split(input, " ")
+	for i := 0; i < len(inputSlice); i++ {
+		currentChar := inputSlice[i]
 		if currentChar == " " {
 			continue
 		}
