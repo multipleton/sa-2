@@ -1,6 +1,7 @@
 package lab2
 
 import (
+	"errors"
 	"math"
 	"strconv"
 	"strings"
@@ -8,6 +9,9 @@ import (
 
 func CalculatePostfix(input string) (float64, error) {
 	var stack Stack
+	if len(input) == 0 {
+		return 0, errors.New("Invalid length")
+	}
 	inputSlice := strings.Split(input, " ")
 	for i := 0; i < len(inputSlice); i++ {
 		currentChar := inputSlice[i]
@@ -18,6 +22,8 @@ func CalculatePostfix(input string) (float64, error) {
 			first, _ := stack.Pop()
 			if calcResult, err := DoOperation(currentChar, first, second); err == false {
 				stack.Push(calcResult)
+			} else {
+				return 0, errors.New("Error with calculations")
 			}
 		}
 	}
@@ -34,7 +40,10 @@ func DoOperation(operation string, firstOperand, secondOperand float64) (float64
 	case "*":
 		return firstOperand * secondOperand, false
 	case "/":
-		return firstOperand / secondOperand, false
+		if secondOperand != 0. {
+			return firstOperand / secondOperand, false
+		}
+		return 0, true
 	case "^":
 		return math.Pow(firstOperand, secondOperand), false
 	default:
