@@ -10,7 +10,7 @@ import (
 func CalculatePostfix(input string) (float64, error) {
 	var stack Stack
 	if len(input) == 0 {
-		return 0, errors.New("Invalid length")
+		return 0, errors.New("invalid length")
 	}
 	inputSlice := strings.Split(input, " ")
 	for i := 0; i < len(inputSlice); i++ {
@@ -20,16 +20,16 @@ func CalculatePostfix(input string) (float64, error) {
 		} else {
 			second, err := stack.Pop()
 			if err {
-				return 0, errors.New("Invalid characters")
+				return 0, errors.New("invalid characters")
 			}
 			first, err := stack.Pop()
 			if err {
-				return 0, errors.New("Invalid characters")
+				return 0, errors.New("invalid characters")
 			}
 			if calcResult, err := DoOperation(currentChar, first, second); !err {
 				stack.Push(calcResult)
 			} else {
-				return 0, errors.New("Error with calculations")
+				return 0, errors.New("error with calculations")
 			}
 		}
 	}

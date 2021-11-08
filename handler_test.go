@@ -2,9 +2,10 @@ package lab2
 
 import (
 	"bytes"
-	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCompute_Correct_1(t *testing.T) {
@@ -43,7 +44,7 @@ func TestCompute_Correct_3(t *testing.T) {
 	}
 }
 
-func TestCompute_Incorrect_3(t *testing.T) {
+func TestCompute_Incorrect_1(t *testing.T) {
 	output := new(bytes.Buffer)
 	handler := ComputeHandler{
 		strings.NewReader("string"),
