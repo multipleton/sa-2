@@ -10,8 +10,8 @@ import (
 func TestCompute_Correct_1(t *testing.T) {
 	output := new(bytes.Buffer)
 	handler := ComputeHandler{
-		Input:  strings.NewReader("2 6 +"),
-		Output: output,
+		strings.NewReader("2 6 +"),
+		output,
 	}
 	err := handler.Compute()
 	if assert.Nil(t, err) {
@@ -22,8 +22,8 @@ func TestCompute_Correct_1(t *testing.T) {
 func TestCompute_Correct_2(t *testing.T) {
 	output := new(bytes.Buffer)
 	handler := ComputeHandler{
-		Input:  strings.NewReader("4 1 - 5 *"),
-		Output: output,
+		strings.NewReader("4 1 - 5 *"),
+		output,
 	}
 	err := handler.Compute()
 	if assert.Nil(t, err) {
@@ -34,8 +34,8 @@ func TestCompute_Correct_2(t *testing.T) {
 func TestCompute_Correct_3(t *testing.T) {
 	output := new(bytes.Buffer)
 	handler := ComputeHandler{
-		Input:  strings.NewReader("20 4 / 5 -"),
-		Output: output,
+		strings.NewReader("20 4 / 5 -"),
+		output,
 	}
 	err := handler.Compute()
 	if assert.Nil(t, err) {
@@ -46,8 +46,8 @@ func TestCompute_Correct_3(t *testing.T) {
 func TestCompute_Incorrect_3(t *testing.T) {
 	output := new(bytes.Buffer)
 	handler := ComputeHandler{
-		Input:  strings.NewReader("string"),
-		Output: output,
+		strings.NewReader("string"),
+		output,
 	}
 	err := handler.Compute()
 	assert.Error(t, err)
