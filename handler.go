@@ -3,12 +3,10 @@ package lab2
 import (
 	"bytes"
 	"fmt"
-	"io"
 )
 
 type ComputeHandler struct {
-	io.Reader
-	io.Writer
+	// TODO: Add necessary fields.
 }
 
 func (ch *ComputeHandler) Compute() error {
