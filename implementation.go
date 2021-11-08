@@ -18,9 +18,15 @@ func CalculatePostfix(input string) (float64, error) {
 		if parsed, err := strconv.ParseFloat(currentChar, 64); err == nil {
 			stack.Push(parsed)
 		} else {
-			second, _ := stack.Pop()
-			first, _ := stack.Pop()
-			if calcResult, err := DoOperation(currentChar, first, second); err == false {
+			second, err := stack.Pop()
+			if err {
+				return 0, errors.New("Invalid characters")
+			}
+			first, err := stack.Pop()
+			if err {
+				return 0, errors.New("Invalid characters")
+			}
+			if calcResult, err := DoOperation(currentChar, first, second); !err {
 				stack.Push(calcResult)
 			} else {
 				return 0, errors.New("Error with calculations")
