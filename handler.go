@@ -1,6 +1,8 @@
 package lab2
 
 import (
+	"bytes"
+	"fmt"
 	"io"
 )
 
@@ -10,14 +12,16 @@ type ComputeHandler struct {
 }
 
 func (ch *ComputeHandler) Compute() error {
-	input := make([]byte, 64)
-	for {
-		_, err := ch.Reader.Read(input)
-		if err == io.EOF {
-			break
-		}
+	buffer := new(bytes.Buffer)
+	_, err := buffer.ReadFrom(ch.Reader)
+	if err != nil {
+		return err
 	}
-	expression := string(input)
-	_, err := CalculatePostfix(expression)
+	expression := buffer.String()
+	res, err := CalculatePostfix(expression)
+	if err != nil {
+		return err
+	}
+	_, err = fmt.Fprint(ch.Writer, fmt.Sprint(res))
 	return err
 }

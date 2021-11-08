@@ -23,7 +23,8 @@ func main() {
 	var writer io.Writer
 	err := handleIO(&reader, &writer)
 	if err != nil {
-		fmt.Fprint(os.Stderr, err)
+		fmt.Fprintln(os.Stderr, err)
+		return
 	}
 	handler := &lab2.ComputeHandler{
 		Reader: reader,
@@ -31,12 +32,13 @@ func main() {
 	}
 	err = handler.Compute()
 	if err != nil {
-		fmt.Fprint(os.Stderr, err)
+		fmt.Fprintln(os.Stderr, err)
+		return
 	}
 }
 
 func handleIO(input *io.Reader, output *io.Writer) error {
-	if *inputExpression != "" && *inputFile != "" {
+	if *inputExpression != "" && *inputFile != "" || *inputExpression == "" && *inputFile == "" {
 		return errors.New("invalid arguments")
 	}
 	if *inputExpression != "" {
@@ -49,7 +51,7 @@ func handleIO(input *io.Reader, output *io.Writer) error {
 		*input = res
 	}
 	if *outputFile != "" {
-		res, err := os.Open(*outputFile)
+		res, err := os.OpenFile(*outputFile, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 		if err != nil {
 			return err
 		}
