@@ -1,23 +1,12 @@
 package lab2
 
-import (
-	"io"
-)
-
+// ComputeHandler should be constructed with input io.Reader and output io.Writer.
+// Its Compute() method should read the expression from input and write the computed result to the output.
 type ComputeHandler struct {
-	io.Reader
-	io.Writer
+	// TODO: Add necessary fields.
 }
 
 func (ch *ComputeHandler) Compute() error {
-	input := make([]byte, 64)
-	for {
-		_, err := ch.Reader.Read(input)
-		if err == io.EOF {
-			break
-		}
-	}
-	expression := string(input)
-	_, err := CalculatePostfix(expression)
-	return err
+	// TODO: Implement.
+	return nil
 }
