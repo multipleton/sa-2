@@ -1,20 +1,16 @@
 package lab2
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 	"strings"
 )
 
-func CalculatePostfix(input string) (string, error) {
+func CalculatePostfix(input string) (float64, error) {
 	var stack Stack
 	inputSlice := strings.Split(input, " ")
 	for i := 0; i < len(inputSlice); i++ {
 		currentChar := inputSlice[i]
-		if currentChar == " " {
-			continue
-		}
 		if parsed, err := strconv.ParseFloat(currentChar, 64); err == nil {
 			stack.Push(parsed)
 		} else {
@@ -26,7 +22,7 @@ func CalculatePostfix(input string) (string, error) {
 		}
 	}
 	result, _ := stack.Pop()
-	return fmt.Sprintf("%f", result), nil
+	return result, nil
 }
 
 func DoOperation(operation string, firstOperand, secondOperand float64) (float64, bool) {
