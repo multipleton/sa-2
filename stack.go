@@ -12,11 +12,11 @@ func (s *Stack) Push(item float64) {
 
 func (s *Stack) Pop() (float64, bool) {
 	if s.IsEmpty() {
-		return 0, false
+		return 0, true
 	} else {
 		index := len(*s) - 1
 		element := (*s)[index]
 		*s = (*s)[:index]
-		return element, true
+		return element, false
 	}
 }
