@@ -3,10 +3,9 @@ package lab2
 import (
 	"fmt"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
-
 
 func TestCalculatePostfix_EmptyParameter(t *testing.T) {
 	_, err := CalculatePostfix("")
@@ -15,11 +14,8 @@ func TestCalculatePostfix_EmptyParameter(t *testing.T) {
 
 func TestCalculatePostfixn_InvalidParameters(t *testing.T) {
 	_, err := CalculatePostfix("abc")
-	assert.Error(t, err, "Calling CalculatePostfix with invalid characters should return error") 
+	assert.Error(t, err, "Calling CalculatePostfix with invalid characters should return error")
 }
-
-
-
 
 func TestCalculatePostfix_Adding_Integers(t *testing.T) {
 	res, err := CalculatePostfix("4 7 + 6 +")
@@ -42,9 +38,6 @@ func TestCalculatePostfix_Adding_Negatives(t *testing.T) {
 	}
 }
 
-
-
-
 func TestCalculatePostfix_Subtracting_Integers(t *testing.T) {
 	res, err := CalculatePostfix("5 18 -")
 	if assert.Nil(t, err) {
@@ -65,9 +58,6 @@ func TestCalculatePostfix_Subtracting_Negatives(t *testing.T) {
 		assert.Equal(t, float64(2), res)
 	}
 }
-
-
-
 
 func TestCalculatePostfix_Multiplying_Integers(t *testing.T) {
 	res, err := CalculatePostfix("5 18 * 2 *")
@@ -97,9 +87,6 @@ func TestCalculatePostfix_Multiplying_ByZero(t *testing.T) {
 	}
 }
 
-
-
-
 func TestCalculatePostfix_Dividing_Integers(t *testing.T) {
 	res, err := CalculatePostfix("18 5 / 2 /")
 	if assert.Nil(t, err) {
@@ -123,11 +110,8 @@ func TestCalculatePostfix_Dividing_Negatives(t *testing.T) {
 
 func TestCalculatePostfix_Dividing_ByZero(t *testing.T) {
 	_, err := CalculatePostfix("13 0 /")
-	assert.Error(t, err, "String with dividing by zero should return error") 
+	assert.Error(t, err, "String with dividing by zero should return error")
 }
-
-
-
 
 func TestCalculatePostfix_Exponentiating_IntegerExponent(t *testing.T) {
 	res, err := CalculatePostfix("6 3 ^")
@@ -157,9 +141,6 @@ func TestCalculatePostfix_Exponentiating_ZeroExponent(t *testing.T) {
 	}
 }
 
-
-
-
 func TestCalculatePostfix_ComplexExpression_1(t *testing.T) {
 	res, err := CalculatePostfix("6 10 + 4 - 1 1 2 * + / 1 +")
 	if assert.Nil(t, err) {
@@ -178,10 +159,6 @@ func TestCalculatePostfix_ComplexExpression_3(t *testing.T) {
 		assert.Equal(t, float64(10), res)
 	}
 }
-
-
-
-
 
 func ExampleCalculatePostfix() {
 	res, _ := CalculatePostfix("7 5 - 8 + -1 -5 * /")
