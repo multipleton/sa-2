@@ -163,7 +163,6 @@ func TestCalculatePostfix_ComplexExpression_3(t *testing.T) {
 func ExampleCalculatePostfix() {
 	res, _ := CalculatePostfix("7 5 - 8 + -1 -5 * /")
 	fmt.Println(res)
-
 	// Output:
 	// 2
 }
