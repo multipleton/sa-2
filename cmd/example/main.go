@@ -48,6 +48,7 @@ func handleIO(input *io.Reader, output *io.Writer) error {
 		if err != nil {
 			return err
 		}
+		defer res.Close()
 		*input = res
 	}
 	if *outputFile != "" {
@@ -55,6 +56,7 @@ func handleIO(input *io.Reader, output *io.Writer) error {
 		if err != nil {
 			return err
 		}
+		defer res.Close()
 		*output = res
 	} else {
 		*output = os.Stdout
